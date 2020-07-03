@@ -1,27 +1,28 @@
-import React from "react";
-import { observer } from "mobx-react";
+import React from "react"
+import { observer } from "mobx-react"
 
 @observer
 class TodoList extends React.Component {
   filter(e) {
-    this.props.store.filter = e.target.value;
+    this.props.store.filter = e.target.value
   }
   render() {
-    const { todos } = this.props.store;
-    const list = todos.map((todo) => <li>{todo}</li>);
+    const { todos, filter, filteredTodos } = this.props.store
+    const list = filteredTodos.map((todo) => <li>{todo}</li>)
 
     return (
       <div>
         <h1>todos</h1>
-        <ul>{list}</ul>
+        <div>{filter}</div>
         <input
+          value={filter}
           className="filter"
           onChange={this.filter.bind(this)}
-          placeholder="filter"
         />
+        <ul>{list}</ul>
       </div>
-    );
+    )
   }
 }
 
-export default TodoList;
+export default TodoList
